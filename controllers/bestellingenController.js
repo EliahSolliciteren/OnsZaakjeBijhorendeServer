@@ -10,19 +10,25 @@ module.exports={
 
 
 create: (req,res,next)=> {
-//console.log(req.body.naam)
+console.log(req.body.gerechten)
+const aantallen=req.body.aantal
+let aantallenArray=[]
+aantallen.forEach(e=>{aantallenArray.push(e.aantal)})
+console.log(aantallenArray)
 
-const gerechtenArray=[]
 
 
+//const gerechtenArray=[]
 
+
+console.log(req.body)
 
     bestelling.create({
 
 klant: req.body.klant,
 datum: req.body.datum,
 
-aantal: req.body.aantal,
+aantal: aantallenArray,
 notities: req.body.notities
 
 }).then(resultaat=>{const deBestelling=resultaat
@@ -53,9 +59,9 @@ notities: req.body.notities
     /*console.log(bestelling)
     for (const gerecht in req.body.gerechten){
 gerecht.find({naam:gerecht.naam[0]}).then(resultaat=>console.log(resultaat))}
-    findByIdAndUpdate(bestelling._id)*/
+    findByIdAndUpdate(bestelling._id)
     
-    ,)},
+    ,)},*/)},
 alleBestellingen: (req,res,next)=> {
 
 bestelling.find().then(bestellingen=>{res.json(bestellingen)})

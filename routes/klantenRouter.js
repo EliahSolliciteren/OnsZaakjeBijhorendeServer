@@ -5,6 +5,8 @@ klantenController = require("../controllers/klantenController")
 
 
 
+router.post('/create', klantenController.create, klantenController.next)
+router.post('/aanmelden', klantenController.aanmelden, klantenController.next)
 
 
 
@@ -16,5 +18,4 @@ klantenController = require("../controllers/klantenController")
 
 
 
-
-module.exports=router
+module.exports=router;

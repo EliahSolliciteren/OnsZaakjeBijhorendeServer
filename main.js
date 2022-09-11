@@ -34,11 +34,7 @@ app.use(flash())
 
 //const passportLocalMongoose = require('passport-local-mongoose');
 //passport.use(new LocalStrategy(bezoeker.authenticate()));
-app.use((req, res, next) => {
-    res.locals.flash = req.flash();
-   
-    next();
-    })
+
 const MongoDB = require("mongodb").MongoClient,
 dbURL = "mongodb://localhost:27017",
 dbName = 'mijnZaak'
@@ -58,9 +54,25 @@ const db = mongoose.connection;
 db.once("open", () => {
 console.log("Successfully connected to MongoDB using Mongoose")
 })
+const passport = require("passport")
+app.use(passport.initialize())
+app.use(passport.session())
+const klant = require("./modules/klant")
+passport.use(klant.createStrategy())
+passport.serializeUser(klant.serializeUser())
+passport.deserializeUser(klant.deserializeUser())
+const passportLocalMongoose = require('passport-local-mongoose');
 
-
-
+app.use((req, res, next) => {
+    
+    
+    res.locals.flash = req.flash();
+    res.locals.logIn = req.isAuthenticated();
+    res.locals.user = req.user;
+    
+    
+next();
+})
 
 
 

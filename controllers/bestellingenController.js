@@ -9,62 +9,32 @@ module.exports={
 
 
 
-create: (req,res,next)=> {
-console.log(req.body.gerechten)
-const aantallen=req.body.aantal
-let aantallenArray=[]
-aantallen.forEach(e=>{aantallenArray.push(e.aantal)})
-console.log(aantallenArray)
 
 
+    
+    
+    
+    
 
-//const gerechtenArray=[]
-
-
+create:(req,res,next)=>{
 console.log(req.body)
+const gerechten= req.body.bestelling.map(gerecht=>mongoose.Types.ObjectId(gerecht._id))
+//console.log(gerechten)
+//console.log(req.body.klant)
+const klant= mongoose.Types.ObjectId(req.body.klant._id)
+//console.log(req.body.bestelling)
+bestelling.create({
+gerechten:gerechten,
+datum:req.body.datum,
+klant:klant,
+totaal:req.body.totaal,
+adres:req.body.adres
+}).exec()
 
-    bestelling.create({
-
-klant: req.body.klant,
-datum: req.body.datum,
-
-aantal: aantallenArray,
-notities: req.body.notities
-
-}).then(resultaat=>{const deBestelling=resultaat
-    req.body.naam.forEach(element=>{
-        gerecht.findOne({naam:element.naam}).then(resultaat=>{bestelling.findByIdAndUpdate(deBestelling._id,{$push:{gerechten:resultaat._id}}).then(resultaat=>console.log(resultaat))})})}
-        
-
-
-
-/*.then(bestelling=>{ var bestelling2=bestelling;   req.body.gerechten.forEach((element=>{
- /*   gerecht.find({naam:element.naam}).then(gerecht2=>{
-        const gerechtId=gerecht2[0]._id
-        console.log(bestelling2._id)
-        console.log(gerechtId)
-        gerecht.findById(gerechtId).then(einde=>{console.log(einde)})
-   bestelling.findByIdAndUpdate({_id:bestelling2._id},{$push: {'gerechten':gerechtId}})
-    res.send('res?')
-    
-    })}))*/
-    
-    
-    
-    
-    
-    
-    
-    
-    /*console.log(bestelling)
-    for (const gerecht in req.body.gerechten){
-gerecht.find({naam:gerecht.naam[0]}).then(resultaat=>console.log(resultaat))}
-    findByIdAndUpdate(bestelling._id)
-    
-    ,)},*/)},
+}   , 
 alleBestellingen: (req,res,next)=> {
 
-bestelling.find().then(bestellingen=>{res.json(bestellingen)})
+bestelling.find().then(bestellingen=>{res.json(bestellingen); console.log(bestellingen)})
 
 
 

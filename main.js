@@ -32,12 +32,10 @@ app.use(flash())
 
 
 
-//const passportLocalMongoose = require('passport-local-mongoose');
-//passport.use(new LocalStrategy(bezoeker.authenticate()));
 
 const MongoDB = require("mongodb").MongoClient,
-dbURL = "mongodb://localhost:27017",
-dbName = 'mijnZaak'
+dbURL = process.env.CONNECTION_STRING,
+dbName = 'test'
 MongoDB.connect(dbURL, (error, client)=> {
 autoIndex:true;
 useCreateIndex:true
@@ -48,7 +46,7 @@ let db = client.db(dbName);
 const mongoose = require("mongoose");
 
 
-mongoose.connect("mongodb://localhost:27017/mijnZaak",
+mongoose.connect(process.env.CONNECTION_STRING,
 {useNewUrlParser: true,})
 const db = mongoose.connection;
 db.once("open", () => {
@@ -75,7 +73,7 @@ next();
 })
 
 
-
+var jwt = require('jsonwebtoken');
 
 
 app.use("/",router)

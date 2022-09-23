@@ -19,12 +19,7 @@ gerechten:[{
 
 
 }],
-aantal:[{
 
-type: Number
-
-
-}],
 
 datum: {
 
@@ -32,16 +27,41 @@ datum: {
 
 },
 
-notities: [String]
-,
+
 
 betaald: {
 
 type: Boolean,
 
-}
+},
+totaal:{
+
+type:Number
 
 },
+
+
+
+adres:{
+
+    gemeente:{
+
+type:String
+    },
+
+    straat:{
+type:String
+
+    },
+
+    huisnummer:{
+
+        type:Number
+    }
+
+
+
+}},
 
 {
 

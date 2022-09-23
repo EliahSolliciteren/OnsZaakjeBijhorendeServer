@@ -10,7 +10,7 @@ console.log(req.body)
 gerecht.create({
     naam:req.body.naam,
     prijs:req.body.prijs,
-
+    categorie: req.body.categorie
 })
 
 res.json({    status: 200
